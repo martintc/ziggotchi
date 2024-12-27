@@ -15,6 +15,37 @@ pub const LCD = struct {
         self.screen[offset] = color;
     }
 
+    pub fn put_sprite(self: *LCD, sprite: []const u8, x: usize, y: usize) void {
+        var i: usize = x;
+        var j: usize = y;
+
+        for (sprite) |pixel| {
+            if (pixel == '\n') {
+                j += 1;
+                i = 0;
+                continue;
+            }
+
+            if (pixel == '0') {
+                self.put_pixel(i, j, 0);
+            }
+
+            if (pixel == '1') {
+                self.put_pixel(i, j, 1);
+            }
+
+            if (pixel == '2') {
+                self.put_pixel(i, j, 2);
+            }
+
+            if (pixel == '3') {
+                self.put_pixel(i, j, 3);
+            }
+
+            i += 1;
+        }
+    }
+
     pub fn clear_screen(self: *LCD) void {
         @memset(self.screen, 0);
     }
