@@ -45,25 +45,7 @@ pub const Game = struct {
     }
 
     pub fn run(self: *Game) !void {
-        // var x: usize = 0;
-        // var y: usize = 0;
-        // for (egg_0) |j| {
-        //     if (j == '\n') {
-        //         y += 1;
-        //         x = 0;
-        //         continue;
-        //     }
-
-        //     if (j == '0') {
-        //         self.screen.put_pixel(x, y, 0);
-        //         x += 1;
-        //         continue;
-        //     }
-
-        //     self.screen.put_pixel(x, y, 3);
-        //     x += 1;
-        // }
-
+        // sample for placing a sprite
         self.screen.put_sprite(egg_0, 0, 0);
 
         var quit = false;
