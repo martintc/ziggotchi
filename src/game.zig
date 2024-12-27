@@ -1,10 +1,14 @@
 const std = @import("std");
 const lcd = @import("lcd.zig");
 const constants = @import("constants.zig");
+const colors = @import("colors.zig");
 
 const c = @cImport(@cInclude("SDL3/SDL.h"));
 
 const cat_0 = @embedFile("assets/cat_0");
+const food_icon = @embedFile("assets/food_icon");
+const light_bulb = @embedFile("assets/light_bulb");
+const egg_0 = @embedFile("assets/egg/egg_0");
 
 pub const Game = struct {
     window: *c.SDL_Window,
@@ -41,22 +45,22 @@ pub const Game = struct {
     }
 
     pub fn run(self: *Game) !void {
-        var x: usize = 5;
-        var y: usize = 1;
-        for (cat_0) |j| {
+        var x: usize = 0;
+        var y: usize = 0;
+        for (egg_0) |j| {
             if (j == '\n') {
                 y += 1;
-                x = 5;
+                x = 0;
                 continue;
             }
 
             if (j == '0') {
-                self.screen.put_pixel(x, y, 0x000000FF);
+                self.screen.put_pixel(x, y, 0);
                 x += 1;
                 continue;
             }
 
-            self.screen.put_pixel(x, y, 0xFFFFFFFF);
+            self.screen.put_pixel(x, y, 3);
             x += 1;
         }
 
@@ -70,7 +74,7 @@ pub const Game = struct {
                 }
             }
 
-            _ = c.SDL_SetRenderDrawColor(self.renderer, 0x00, 0x00, 0x00, 0xFF);
+            _ = c.SDL_SetRenderDrawColor(self.renderer, colors.Green0.r, colors.Green0.g, colors.Green0.b, colors.Green0.a);
             _ = c.SDL_RenderClear(self.renderer);
 
             self.screen.draw(self.renderer);
